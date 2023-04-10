@@ -75,6 +75,15 @@
             })
         </script>
     @endif
+    @if (Session::has('duplicada2'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                text: 'El nombre de grupo esta duplicado'
+                // footer: '<a href="">Why do I have this issue?</a>'
+            })
+        </script>
+    @endif
     @if (Session::has('sinpermiso'))
         <script>
             Swal.fire({

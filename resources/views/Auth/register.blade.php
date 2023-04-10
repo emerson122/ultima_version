@@ -76,6 +76,16 @@
     // alert('El usuario que indico ya existe')
   </script>
   @endif
+  @if(Session::has('existeC'))
+  <script>
+    Swal.fire({
+      icon: 'error',
+      text: 'El correo que indico, no esta disponible',
+      // footer: '<a href="">Why do I have this issue?</a>'
+    })
+    // alert('El usuario que indico ya existe')
+  </script>
+  @endif
 
 
   <div class="container-scroller">

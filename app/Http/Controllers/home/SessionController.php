@@ -363,6 +363,7 @@ class SessionController extends Controller
                 "PASS" => $codificacion
             ]);
             $posicionU = strrpos($registrarUsuario, "EL USUARIO YA EXISTE");
+            $posicionc = strrpos($registrarUsuario, "EL CORREO YA EXISTE");
         } catch (\Exception $e) {
             return 'Ocurrio una error con la  API POST PERSONAS';
         }
@@ -371,8 +372,12 @@ class SessionController extends Controller
             return back();
             // return 'Acceso Denegado';
         }
+        if($posicionc > 0) {
+            Session::flash('existeC', 'EL CORREO');
+            return back();
+        }
         if ($posicionU > 0) {
-            Session::flash('existe', 'Usuario ya  existe');
+            Session::flash('existe', 'Usuario ');
             return back();
         } else {
             try {

@@ -127,11 +127,18 @@ class GrupoController extends Controller
                     "PV_NOM_GRUPO" => $request->name
                 ]);
                 $duplicado = strrpos($insertar, "NUMERO DE GRUPO DUPLICADO");
+                $duplicado2 = strrpos($insertar, "NOMBRE DE GRUPO DUPLICADO");
 
                 if ($duplicado > 0) {
                     Session::flash('duplicada', '1');
                     return back();
                 }
+
+                if ($duplicado2 > 0) {
+                    Session::flash('duplicada2', '1');
+                    return back();
+                }
+
 
                 Session::flash('insertado', '1');
             } catch (\Exception $e) {
