@@ -246,7 +246,7 @@ function mostrarContra2 () {
 <font color='white'> <i class="bi bi-person-vcard"></i> Identidad </font>
 </center>
 <input type="tel" onclick="tipopersona();"minlength="0" min="0" max="15"
-placeholder="0801-2000-09115"
+placeholder="0000-0000-00000"
 pattern="[0-9]{4}-[0-9]{4}-[0-9]{5}"id="identidad" name="identidad"
 onkeypress="return validarprimercampo(event);"
 class="form-control p_input text-dark bg-white" required>
@@ -260,7 +260,7 @@ class="form-control p_input text-dark bg-white" required>
 <font color='white'> <i class="bi bi-person-vcard"></i> RTN </font>
 </center>
 <input type="tel" onclick="tipopersona();"minlength="0" min="0" max="16"
-placeholder="0801-2000-091159"
+placeholder="0000-0000-000000"
 pattern="[0-9]{4}-[0-9]{4}-[0-9]{6}"id="identidad" name="identidad"
 onkeypress="return validarprimercampo(event);"
 class="form-control p_input text-dark bg-white" required>

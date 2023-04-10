@@ -174,7 +174,8 @@
                                     <font color='white'><i class="bi bi-telephone"></i> Teléfono </font>
                                 </center>
                                 <input type="tel" id="telefono" name="telefono"
-                                    class="form-control p_input text-dark bg-white" placeholder="+504 9021-3300"
+                                    maxlength="20"
+                                    class="form-control p_input text-dark bg-white" placeholder="+504 00000000"
                                     pattern="[+0-9 ]{2,5} [0-9-]{4,13}[0-9-]{4,13}" required>
                             </label>
                         </div>

@@ -150,7 +150,7 @@
                                         </tr>
 
 
-                                        <!-- INICIO MODAL PARA EDITAR  -->
+                                        <!-- INICIO MODAL PARA MODIFICAR PERSONA  -->
                                         <div class="modal-container">
                                             <div class="modal fade bd-example-modal-md"
                                                 id="modal-editar-{{ $persona['COD_PERSONA'] }}">
@@ -256,7 +256,7 @@
                                                                     <label for="" style="background-color: #0778b199">
                                                                         <font color='white'> &nbsp; Edad </font>
                                                                     <input type="number" id="edad-edit-{{  $persona['COD_PERSONA'] }}" name="edad"
-                                                                    placeholder="0" min="0" max="100" onkeyup="validarEdadEdit({{  $persona['COD_PERSONA'] }})"
+                                                                    placeholder="0" min="16" max="100" onkeyup="validarEdadEdit({{  $persona['COD_PERSONA'] }})"
                                                                         class="form-control bg-white text-dark"
                                                                         value="{{ $persona['EDA_PERSONAL'] }}" required>
                                                                 </label>
@@ -269,7 +269,7 @@
                                                                         id="indentidad-edit-{{  $persona['COD_PERSONA']  }}"
                                                                         onclick="tipopersona();"minlength="0"
                                                                         onkeyup="validarDNIedit({{  $persona['COD_PERSONA'] }})"
-                                                                        min="0" placeholder="0801-2000-09115"
+                                                                        min="0" placeholder="0000-0000-00000"
                                                                         pattern="[0-9]{4}-[0-9]{4}-[0-9]{5}"
                                                                         name="identidad"
                                                                         class="form-control p_input text-dark bg-white"
@@ -288,7 +288,7 @@
                                                                     value="{{ $persona['TELEFONO'] }}"
                                                                     id="telefono-edit-{{ $persona['COD_PERSONA'] }}" name="telefono"
                                                                     class="form-control p_input text-dark bg-white"
-                                                                    placeholder="+504 9021-3300"
+                                                                    placeholder="+504 0000-0000"
                                                                     pattern="[+0-9 ]{2,5} [0-9-]{4,13}[0-9-]{4,13}" required>
                                                                     <div id="perteledit-{{ $persona['COD_PERSONA']}}"></div>
                                                                 </label>
@@ -347,7 +347,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- FIN DE MODAL PARA EDITAR  -->
+                                        <!-- FIN DE MODAL PARA MODIFICAR PERSONA  -->
 
 
 
@@ -497,7 +497,7 @@
                                 <label for="" style="background-color: #0778b199">
                                     <font color='white'> &nbsp; Edad </font>
                                     <input type="number" id="edad" name="edad" onkeyup="validarEdad(this)"
-                                    placeholder="0" min="0" max="100"
+                                    placeholder="0" min="16" max="100"
                                     class="form-control bg-white text-dark" required>
                                 </label>
                                 <div id="divedad"></div>
@@ -505,7 +505,7 @@
                             <label for="" style="background-color: #0778b199">
                                 <font color='white'> &nbsp; Identidad </font>
                                 <input type="tel" onclick="tipopersona();"minlength="0" id="dni"
-                                    onkeyup="validarDNI(this)" min="0" placeholder="0801-2000-09115"
+                                    onkeyup="validarDNI(this)" min="0" placeholder="0000-0000-00000"
                                     pattern="[0-9]{4}-[0-9]{4}-[0-9]{5}"id="identidad" name="identidad"
                                     class="form-control p_input text-dark bg-white" required>
                                 </label>
@@ -517,7 +517,7 @@
                             <label style="background-color: #0778b199">
                                 <font color='white'>Teléfono </font>
                                 <input type="tel" id="telefono" name="telefono" onkeyup="validarTel(this)"
-                                    class="form-control p_input text-dark bg-white" placeholder="+504 9021-3300"
+                                    class="form-control p_input text-dark bg-white" placeholder="+504 0000-0000"
                                     pattern="[+0-9 ]{2,5} [0-9-]{4,13}[0-9-]{4,13}" required>
                                 <div id="divtelefono"></div>
                             </label>
