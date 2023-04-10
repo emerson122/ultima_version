@@ -18,12 +18,12 @@ class PreguntasController extends Controller
     public function mostrar()
     {
 
-        if(Cache::get('rol')=='Administrador'){
+        if(Cache::get('rol')/* =='Administrador' */){/* 
             $preg = http::withToken(Cache::get('token'))->get($this->url.'/sel_preg');
             //return $preg;
             //return Cache::get('rol');
             $pregArr = $preg->json();
-        }else{
+        }else{ */
             $preg = http::withToken(Cache::get('token'))->post($this->url.'/sel_usr_preg',[
                 
                     "USR" => Cache::get('user')
