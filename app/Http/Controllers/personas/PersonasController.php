@@ -138,21 +138,26 @@ class PersonasController extends Controller
         $parametro = Http::withToken(Cache::get('token'))->post($this->url . '/parametros/buscar', [
             "PARAMETRO"=>"ADMIN_CANT_PREG"   
         ]);  
+
+        
         $preguntasArr = $parametro->json();
         foreach($preguntasArr as $data){
             $cantidad = $data['VALOR'];
         }
+       
 
-        $insertarP = Http::withToken(Cache::get('token'))->post($this->url.'/seguridad/preguntas/insertar',[
-            "user"=> Cache::get('user'),
-            "preg"=> $request->pregunta,
-            "resp"=> $request->respuesta,
-            "pass"=> ''
-        ]);
+        // $insertarP = Http::withToken(Cache::get('token'))->post($this->url.'/seguridad/preguntas/insertar',[
+        //     "user"=> Cache::get('user'),
+        //     "preg"=> $request->pregunta,
+        //     "resp"=> $request->respuesta,
+        //     "pass"=> ''
+        // ]);
+
         //ver cuantos intentos a realizado
         if (Cache::has('resp_preg')) {
 
             $resp = Cache::get('resp_preg') + 1;
+           
             if ($resp > $cantidad) {
                 Cache::forget('resp_preg');
                 //verificar permisos del rol
@@ -160,6 +165,7 @@ class PersonasController extends Controller
                 $permisos = http::withToken(Cache::get('token'))->post($this->url . '/permisos/sel_per_rol', [
                     "PV_ROL" => Cache::get('rol')
                 ]);
+            
                 $permisos = $permisos->json();
                 $i = 0;
                 foreach ($permisos as $key) {
@@ -175,7 +181,8 @@ class PersonasController extends Controller
             }
             
         }else {
-            return 'ocurrio un error';
+            Cache::put('resp_preg', 1);
+            return view('home.preguntas');
         }
 
     }

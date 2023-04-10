@@ -268,8 +268,7 @@ class SessionController extends Controller
         }
 
         Cache::put('genero', $genero);
-
-       //
+        
         $periodo = Http::withToken(Cache::get('token'))->get($this->url . '/estado/periodo');
         $periodo = $periodo->json();
         $new = '';

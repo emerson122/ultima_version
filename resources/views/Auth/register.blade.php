@@ -127,23 +127,26 @@
                 </div>
                <!-- CAMPO DE CONTRASEÑA DE LOGIN MOSTRAR MEDIANTE ICONO CANDADO -->
                 
-                  <label><H4><i class="mdi mdi-lock"  onclick="mostrarContra()"></i> Contraseña</H4></label>
-                  <div class="form-row">
-                      <div id="is-relative" class="col" style="div#is-relative{ max-width: 420px; position: relative;}">
-                    <input style="padding-right: 2.5rem;" class="form-control p_input text-dark bg-white" onkeyup="muestra_seguridad_clave(this.value, this.form)" placeholder="Ingresa una contraseña" type="password" name="password1" id="password1" required>
-                    <span id="icon" style="color: black; position: absolute; display: block; bottom: .2rem; right: 1rem; user-select: none;cursor: pointer;">
-                      <i id="ojo1" class="mdi mdi-eye-outline" onclick="mostrarContra()"></i>
-                    </span>
-                  </div>
+               
+               <label><H4><i class="mdi mdi-lock" onclick="mostrarContra()"></i> Contraseña</H4></label>
+               <div class="form-row">
+                 <div id="is-relative" class="col" style="div#is-relative{ max-width: 420px; position: relative;}">
+                  <input style="padding-right: 2.5rem;" class="form-control p_input text-dark bg-white" onkeyup="muestra_requisitos_clave(this.value)" placeholder="Ingresa una contraseña" type="password" name="password1" id="password1" required>
+                  <span id="icon" style="color: black; position: absolute; display: block; bottom: .2rem; right: 1rem; user-select: none;cursor: pointer;">
+                    <i id="ojo1" class="mdi mdi-eye-outline" onclick="mostrarContra()"></i>
+                  </span>
+                </div>
+              </div>
+              <label> <b> Seguridad de Contraseña</b></label>
+              <div id="requisitos-clave"></div>
+               
                  
                   
-                </div>
-                <label> <b> Seguridad de Contraseña</b></label>
-                  <input id="seguridad" name="seguridad" type="text" style="background: transparent; border: none; color: #ffffff; " onfocus="blur()">
-             
-                <br>
-            <!-- END CONTRASEÑA -->
-            <!-- 2 CAMPO DE CONTRASEÑA DE LOGIN MOSTRAR MEDIANTE ICONO CANDADO -->
+              <input id="seguridad" name="seguridad" type="text" style="background: transparent; border: none; color: #ffffff; " onfocus="blur()">
+              
+              <br>
+              <!-- END CONTRASEÑA -->
+              <!-- 2 CAMPO DE CONTRASEÑA DE LOGIN MOSTRAR MEDIANTE ICONO CANDADO -->
             
               <label><H4><i class="mdi mdi-lock"  onclick="mostrarContrasena()"></i> Repetir Contraseña</H4></label>
               <div class="form-row">
@@ -154,6 +157,7 @@
                 </span>
               </div>
                 </div>
+              </div>
                 <br>
                 <div class="text-center">
                   <button onclick="validacion();"  type="submit" class="btn btn-primary btn-block enter-btn">Registrarse</button></a>
@@ -208,8 +212,26 @@
     <!-- page-body-wrapper ends -->
   </div>
 
-  {{-- JQUERY --}}
+  {{-- seguridad --}}
 <script>
+function muestra_requisitos_clave(clave) {
+    var mensaje = "La contraseña debe contener al menos:\n";
+    var expresion = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[^\w\s]).{8,}$/;
+    var requisitosDiv = document.getElementById("requisitos-clave");
+
+    if (!clave.match(expresion)) {
+        if (!clave.match(/(?=.*[A-Z])/)) mensaje += "- Una letra mayúscula\n";
+        if (!clave.match(/(?=.*[0-9])/)) mensaje += "- Un número\n";
+        if (!clave.match(/(?=.*[a-z])/)) mensaje += "- Una letra minúscula\n";
+        if (!clave.match(/(?=.*[^\w\s])/)) mensaje += "- Un símbolo (!, @, #, etc.)\n";
+        if (clave.length < 8) mensaje += "- Mínimo 8 caracteres\n";
+
+        requisitosDiv.innerHTML = mensaje;
+    } else {
+        // Si se cumplen todos los requisitos, se desaparece el mensaje
+        requisitosDiv.innerHTML = "";
+    }
+}
 
 </script>
   

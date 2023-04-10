@@ -40,6 +40,9 @@
     <link rel="icon" href="{{ asset('assets/images/HTOURS.png') }}" />
 </head>
 
+
+</script>
+
 <body onbeforeunload="return donotgo();" oncopy="return false" onpaste="return false" style="background-color: #145666">
 
     @if (Session::has('misma'))
@@ -113,7 +116,7 @@
                                         <font color='white'> <i class="bi bi-people"></i> Tipo de persona</font>
                                     </h5>
                             </center>
-                            <Select class="form-select form-select-md mb-3" id="tipoPersona" name="tipoPersona"
+                            <Select onchange="rtn()" class="form-select form-select-md mb-3" id="tipoPersona"  name="tipoPersona"
                                 required>
                                 <option hidden selected>Seleccionar</option>
                                 <option value="N">Normal</option>
@@ -126,16 +129,11 @@
                             <div class="row">
                                 <div class="col-12">
 
-                                    <label for="" style="background-color: #0778b199">
-                                        <center>
+                                    <label for="" style="background-color: #0778b199" id="campomodificable">
+                                        <div id="modificame">
 
-                                            <font color='white'> <i class="bi bi-person-vcard"></i> Identidad </font>
-                                        </center>
-                                        <input type="tel" onclick="tipopersona();"minlength="0" min="0"
-                                            placeholder="0801-2000-09115"
-                                            pattern="[0-9]{4}-[0-9]{4}-[0-9]{5}"id="identidad" name="identidad"
-                                            onkeypress="return validarprimercampo(event);"
-                                            class="form-control p_input text-dark bg-white" required>
+                                        </div>
+                                       
                                     </label>
                                 </div>
                             </div>
@@ -261,6 +259,7 @@
         </div>
     </div>
     <script src="{{ asset('assets/js/ab-valpersonas.js') }}"></script>
-</body>
+    
+        </body>
 
 </html>

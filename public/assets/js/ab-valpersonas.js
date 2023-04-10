@@ -235,6 +235,38 @@ function mostrarContra2 () {
     }
     return 0;
  }
+ function rtn() {
+    let tipo = document.getElementById('tipoPersona').value;
+    let modificame = document.getElementById('modificame')
+    if (tipo == 'N'){
+        modificame.innerHTML='';
+        modificame.innerHTML=`
+        <center>
+
+<font color='white'> <i class="bi bi-person-vcard"></i> Identidad </font>
+</center>
+<input type="tel" onclick="tipopersona();"minlength="0" min="0" max="15"
+placeholder="0801-2000-09115"
+pattern="[0-9]{4}-[0-9]{4}-[0-9]{5}"id="identidad" name="identidad"
+onkeypress="return validarprimercampo(event);"
+class="form-control p_input text-dark bg-white" required>
+        `;
+    }
+    if(tipo == 'J'){
+        modificame.innerHTML='';
+        modificame.innerHTML=`
+        <center>
+
+<font color='white'> <i class="bi bi-person-vcard"></i> RTN </font>
+</center>
+<input type="tel" onclick="tipopersona();"minlength="0" min="0" max="16"
+placeholder="0801-2000-091159"
+pattern="[0-9]{4}-[0-9]{4}-[0-9]{6}"id="identidad" name="identidad"
+onkeypress="return validarprimercampo(event);"
+class="form-control p_input text-dark bg-white" required>
+        `
+    }
+}
   /**
    * Validar si tiene MAYUSCULAS
    */
@@ -288,3 +320,5 @@ function mostrarContra2 () {
      var iti = window.intlTelInput(input, {
          utilsScript: "/js/utils.js",
      });
+
+
