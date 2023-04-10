@@ -142,7 +142,7 @@
                
                  
                   
-              <input id="seguridad" name="seguridad" type="text" style="background: transparent; border: none; color: #ffffff; " onfocus="blur()">
+              {{-- <input id="seguridad" name="seguridad" type="text" style="background: transparent; border: none; color: #ffffff; " onfocus="blur()"> --}}
               
               <br>
               <!-- END CONTRASEÑA -->
