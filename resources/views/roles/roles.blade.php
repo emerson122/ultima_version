@@ -112,7 +112,7 @@
                                 <br>
 
                                 
-                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                <button type="submit" class="btn btn-primary" id="btninsertar">Aceptar</button>
                             </form>
                     </div>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -235,7 +235,7 @@
 
                                                                     <a href=""
                                                                         class="btn btn-secondary">Cancelar</a>
-                                                                    <button type="submit"
+                                                                    <button type="submit" id="btnEditar{{ $rols['COD_ROL']  }}"
                                                                         class="btn btn-primary">Aceptar</button>
                                                                 </form>
                                                         </div>

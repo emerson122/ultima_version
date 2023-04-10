@@ -118,6 +118,15 @@ class PeriodoController extends Controller
                     "FEC_FIN" => $request->final,
                     "ESTADO" => $request->estado
                 ]);
+
+               
+
+            $estado = 0;
+			$estado = strrpos($insertar, "LAS FECHAS CREAN CONFLICTOS CON PERIODOS ANTERIOR");
+                if ($estado != 0){
+                    Session::flash("conflictos", "1");
+                    return back();
+                }
             } catch (\Throwable $th) {
                 //throw $th;
                 return 'Error periodo 31';

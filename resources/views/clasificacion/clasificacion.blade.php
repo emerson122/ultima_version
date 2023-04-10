@@ -178,7 +178,7 @@ Clasificación | inicio
                          
                          <br>
                          
-                         <button type="submit" class="btn btn-primary">Aceptar</button>
+                         <button type="submit" class="btn btn-primary" id="btneditar{{ $clasificacion['COD_CLASIFICACION']  }}">Aceptar</button>
                        </form>
                    </div> 
                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -273,7 +273,7 @@ Clasificación | inicio
                           
                               <br>
                               <a href="" class="btn btn-secondary">Cancelar</a>
-                              <button type="submit" class="btn btn-primary">NUEVO</button>
+                              <button type="submit" class="btn btn-primary" id="btninsertar" >NUEVO</button>
                             </form>
                         </div>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>

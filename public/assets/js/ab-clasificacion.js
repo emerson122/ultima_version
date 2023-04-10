@@ -15,6 +15,7 @@ const campos = {
 function validarclasificacion(e) {
     let clasificacion = document.getElementById('clasificacion').value;
     let div = document.getElementById('divclasi');
+    let btn = document.getElementById('btninsertar');
 
     if (expresiones.nombre.test(clasificacion)) {
         document.getElementById('clasificacion').classList.remove('incorrecto') 
@@ -22,13 +23,14 @@ function validarclasificacion(e) {
  
         div.innerHTML='';
         console.log('correcto');
+        btn.disabled = false;
     }else{
         document.getElementById('clasificacion').classList.add('incorrecto') 
       
         div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
 
         console.log('incorrecto');
-
+        btn.disabled = true;
     }
     
 
@@ -37,7 +39,7 @@ function validarclasificacion(e) {
 function validarclasificacionEDIT(e) {
     let clasificacion = document.getElementById(`clasificacion-edit-${e}`).value;
     let div = document.getElementById(`divclasificacion-${e}`);
-
+    let btn = document.getElementById(`btneditar${e}`);
 
     if (expresiones.nombre.test(clasificacion)) {
         document.getElementById(`clasificacion-edit-${e}`).classList.remove('incorrecto') 
@@ -45,12 +47,14 @@ function validarclasificacionEDIT(e) {
  
         div.innerHTML='';
         console.log('correcto');
+        btn.disabled = false;
     }else{
         document.getElementById(`clasificacion-edit-${e}`).classList.add('incorrecto') 
       
         div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
 
         console.log('incorrecto');
+        btn.disabled = true;
 
     }
 

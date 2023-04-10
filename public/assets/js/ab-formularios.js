@@ -293,7 +293,7 @@ function Validarperiodo(e) {
     }else{
         document.getElementById('periodo_ins').classList.add('incorrecto') 
       
-        div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
+        div.innerHTML='<font color="red"> <h5>Ingresa el periodo, año,mes y numero correlativo</h5></font>'
 
         console.log('incorrecto');
 

@@ -21,6 +21,7 @@ const campos = {
 function validarletras(e) {
     let rol = document.getElementById('rol').value;
     let div = document.getElementById('divrol');
+    var btn = document.getElementById('btninsertar');
 
     if (expresiones.nombre.test(rol)) {
         document.getElementById('rol').classList.remove('incorrecto') 
@@ -28,12 +29,15 @@ function validarletras(e) {
  
         div.innerHTML='';
         console.log('correcto');
+        btn.disabled = false;
     }else{
         document.getElementById('rol').classList.add('incorrecto') 
       
         div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
 
         console.log('incorrecto');
+      
+        btn.disabled = true;
 
     }
     
@@ -44,6 +48,8 @@ function validarletras(e) {
 function validardescripcion(e) {
     let des = document.getElementById('des').value;
     let div = document.getElementById('divres');
+    
+    var btn = document.getElementById('btninsertar');
 
     if (expresiones.nombre.test(des)) {
         document.getElementById('des').classList.remove('incorrecto') 
@@ -51,19 +57,21 @@ function validardescripcion(e) {
  
         div.innerHTML='';
         console.log('correcto');
+        btn.disabled = false;
     }else{
         document.getElementById('des').classList.add('incorrecto') 
       
         div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
 
         console.log('incorrecto');
-
+        btn.disabled = true;
     } 
 }
 
 function validareditarROL(e) {
     let rol = document.getElementById(`editrol-${e}`).value;
     let div = document.getElementById(`divroledit-${e}`);
+    let btnEd = document.getElementById(`btnEditar${e}`);
 
     if (expresiones.nombre.test(rol)) {
         document.getElementById(`editrol-${e}`).classList.remove('incorrecto') 
@@ -71,12 +79,14 @@ function validareditarROL(e) {
  
         div.innerHTML='';
         console.log('correcto');
+        btnEd.disabled = false;
     }else{
         document.getElementById(`editrol-${e}`).classList.add('incorrecto') 
       
         div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
 
         console.log('incorrecto');
+        btnEd.disabled = true;
 
     }
     
@@ -87,19 +97,21 @@ function validareditarROL(e) {
 function validareditarDES(e) {
     let rol = document.getElementById(`editres-${e}`).value;
     let div = document.getElementById(`divrresedit-${e}`);
+    let btnEd = document.getElementById(`btnEditar${e}`);
 
     if (expresiones.nombre.test(rol)) {
         document.getElementById(`editres-${e}`).classList.remove('incorrecto') 
         document.getElementById(`editres-${e}`).classList.add('correcto') 
         div.innerHTML='';
         console.log('correcto');
+        btnEd.disabled = false;
     }else{
         document.getElementById(`editres-${e}`).classList.add('incorrecto') 
       
         div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
 
         console.log('incorrecto');
-
+        btnEd.disabled = true;
     }
     
 

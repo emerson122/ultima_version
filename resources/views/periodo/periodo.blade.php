@@ -52,6 +52,15 @@ Período | inicio
             })
         </script>
     @endif
+    @if (Session::has('conflictos'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                text: 'Las fechas crean conflictos con periodos anteriores'
+                // footer: '<a href="">Why do I have this issue?</a>'
+            })
+        </script>
+    @endif
     @if (Session::has('actualizado'))
         <script>
             Swal.fire({
