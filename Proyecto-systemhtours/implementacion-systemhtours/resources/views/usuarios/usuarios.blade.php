@@ -42,6 +42,15 @@
 
 @section('contenido')
 
+    @if(Session::has('correcto'))
+    <script>
+        Swal.fire(
+            '',
+            'Usuario Registrado Correctamente',
+            'success'
+        )
+    </script>
+    @endif
     @if (Session::has('actualizado'))
         <script>
             Swal.fire({
@@ -76,8 +85,8 @@
       <button type="button"  class="btn btn-success mr-3"  data-toggle="modal " data-target="#dialogo1">(+) Nuevo</button>
     </p> --}}
                 <p align="right" valign="baseline">
-                    {{-- <button type="button"  class="btn btn-info"  data-toggle="modal" data-target="#dialogo1">(+) Nuevo</button>
-         --}}
+                    <button type="button"  class="btn btn-info"  data-toggle="modal" data-target="#dialogo1">(+) Nuevo</button>
+        
                     <a type="button" href="{{ route('usuarios.pdf') }}" class="btn btn-danger btn-sm"><i
                             class="mdi mdi-file-pdf"></i>Generar PDF</a>
 
@@ -301,7 +310,7 @@
 
                 <!-- content-wrapper ends -->
 
-
+                <!-- INICIO MODAL PARA NUEVO USR  -->
                 <div class="modal-container">
                     <div class="modal fade bd-example-modal-lg" id="dialogo1">
                         <!-- COLOCARLE UN lg PARA TAMANO MEDIANO COLOCARLE UN sm PARA TAMANO PEQUENO -->
@@ -315,50 +324,119 @@
                                 <!-- CUERPO DEL DIALOGO NUEVA -->
                                 <div class="modal-body">
                                     <center>
-                                        <form action="" method="post">
-                                            <label class="form-label">
-                                                Usuario
-                                                <input type='text' name='Clasificacion'
-                                                    class="form-control text-white" required></input>
+                                        <form action="{{ route('Registrar.usuario') }}" method="POST" id="formregistro">
+                                            @csrf @method('POST')
+                                            <label class="form-group w-75 p-1">
+                                                <label><H4><i class="mdi mdi-account"></i> Nombre completo</H4></label>
+                                                <input  type="text" id="nombre" name="nombre"                                                        placeholder="Ingrese nombre completo" 
+                                                        class="form-control p_input text-white col-lg-12" 
+                                                        onkeyup="validarletrasNom(this)" required>
+                                                <div id="nomdiv"></div>
                                             </label>
-                                            <label class="form-label">
-                                                Nombre del usuario
-                                                <input type='text' name='Clasificacion'
-                                                    class="form-control text-white" required></input>
+                                            <label class="form-group w-75 p-1">
+                                                <label><H4><i class="mdi mdi-account"></i> Usuario</H4></label>
+                                                <input  type="text" style="text-transform:uppercase"  
+                                                        onkeyup="javascript:this.value=this.value.toUpperCase(); 
+                                                        validarletrasUSR(this);" id="user" name="user" 
+                                                        placeholder="Ingrese nombre de usuario" 
+                                                        class="form-control p_input text-white" required>
+                                                <div id="usrdiv"></div>
                                             </label>
-                                            <label class="form-label">
-                                                Seleccionar el Rol
-
-                                                <select class="form-control text-white" name="" id="">
-                                                    <option value=""></option>
-                                                    <option value="">Administrador</option>
-                                                    <option value="">Usuario</option>
-                                                </select>
+                                            <label class="form-label w-75 p-1">
+                                                <label><H4><i class="mdi mdi-email"></i> Correo Electrónico</H4></label>
+                                                <input  type="email" placeholder="Ingresa un Correo Electrónico"  
+                                                        id="correo" name="correo"  
+                                                        class="form-control p_input text-white" 
+                                                        onkeyup="validarletrasEMAIL(this)" required>
+                                                <div id="divCorreo"></div>
                                             </label>
-                                            <br>
-                                            <label class="form-label">
-                                                Correo Electronico
-                                                <input type='email' name='saldo' class="form-control text-white"
-                                                    required></input>
+                                            <label class="form-label w-75 p-1">
+                                                <label><H4><i class="mdi mdi-lock" onclick="mostrarContra()"></i> Contraseña</H4></label>
+                                                <div class="form-row">
+                                                    <div id="is-relative" class="col" style="div#is-relative{ max-width: 420px; position: relative;}">
+                                                        <input  style="padding-right: 2.5rem;" 
+                                                                class="form-control p_input text-white"
+                                                                minlength="8" maxlength="32" 
+                                                                onkeyup="muestra_requisitos_clave(this.value)" 
+                                                                placeholder="Ingrese una contraseña" 
+                                                                type="password" name="password1" id="password1" required>
+                                                        <span id="icon" style="color: black; position: absolute; display: block; bottom: .2rem; right: 1rem; user-select: none;cursor: pointer;">
+                                                        <i id="ojo1" class="mdi mdi-eye-outline" style="color:white" onclick="mostrarContra()"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div id="requisitos-clave"></div>
                                             </label>
-                                            <br>
-                                            <label class="form-label">
-                                                Contraseña
-                                                <input type='password' name='CORREO ELECTRONICO'
-                                                    class="form-control text-white" required></input>
+                                            <label class="form-label w-75 p-1">
+                                                <label><H4><i class="mdi mdi-lock"  onclick="mostrarContrasena()"></i> Repetir Contraseña</H4></label>
+                                                <div class="form-row">
+                                                  <div id="is-relative" class="col" style="div#is-relative{ max-width: 420px; position: relative;}">
+                                                        <input    style="padding-right: 2.5rem;"    
+                                                                    class="form-control p_input text-white"
+                                                                    minlength="8" maxlength="32"  
+                                                                    onchange="comparar();" 
+                                                                    placeholder="Ingrese de nuevo la contraseña" 
+                                                                    type="password" name="password2" id="password2" required>
+                                                        <span id="icon" style="color: black; position: absolute; display: block; bottom: .2rem; right: 1rem; user-select: none;cursor: pointer;">
+                                                            <i id="ojo2" class="mdi  mdi-eye-outline" style="color:white"onclick="mostrarContrasena()"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </label>
-                                            <br>
-                                            <label class="form-label">
-                                                Fecha de vencimiento
-                                                <input type='date' name='fecha' class="form-control text-white"
-                                                    required></input>
-                                            </label>
-                                            <br>
-
-
-                                            <a href="" class="btn btn-secondary">Cancelar</a>
-                                            <button type="submit" class="btn btn-primary">Registrar </button>
+                                            <div class="text-center p-2">
+                                                <a href="{{ route('usuarios.inicio') }}" class="btn btn-secondary">Cancelar</a>
+                                                <button onclick="validacion();"  type="submit" class="btn btn-primary  enter-btn">Registrarse</button>
+                                            </div>
+                                            
                                         </form>
+                                        <script>
+                                            function mostrarContra(){
+                                              var ojo = document.getElementById("ojo1");
+                                              var tipo = document.getElementById("password1");
+                                              if(tipo.type == "password"){
+                                                tipo.type = "text";
+                                                ojo.className = 'mdi mdi-eye-off-outline';
+                                              }else{
+                                                tipo.type = "password";
+                                                ojo.className = 'mdi mdi-eye-outline';
+                                              }
+                                            }
+                                        </script>
+                                        <script>
+                                            function mostrarContrasena(){
+                                              var ojo = document.getElementById("ojo2");
+                                              var tipo = document.getElementById("password2");
+                                              if(tipo.type == "password"){
+                                                ojo.className = 'mdi mdi-eye-off-outline';
+                                                    tipo.type = "text";
+                                                }else{
+                                                  tipo.type = "password";
+                                                  ojo.className = 'mdi mdi-eye-outline';
+                                                }
+                                            } 
+                                        </script>
+                                            {{-- seguridad --}}
+                                        <script>
+                                            function muestra_requisitos_clave(clave) {
+                                                var mensaje = "La contraseña debe contener al menos:\n";
+                                                var expresion = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[^\w\s]).{8,}$/;
+                                                var requisitosDiv = document.getElementById("requisitos-clave");
+                                        
+                                                if (!clave.match(expresion)) {
+                                                    if (!clave.match(/(?=.*[A-Z])/)) mensaje += "- Una letra mayúscula\n";
+                                                    if (!clave.match(/(?=.*[0-9])/)) mensaje += "- Un número\n";
+                                                    if (!clave.match(/(?=.*[a-z])/)) mensaje += "- Una letra minúscula\n";
+                                                    if (!clave.match(/(?=.*[^\w\s])/)) mensaje += "- Un símbolo (!, @, #, etc.)\n";
+                                                    if (clave.length < 8) mensaje += "- Mínimo 8 caracteres\n";
+                                        
+                                                    requisitosDiv.innerHTML = mensaje;
+                                                } else {
+                                                    // Si se cumplen todos los requisitos, se desaparece el mensaje
+                                                    requisitosDiv.innerHTML = "";
+                                                }
+                                            }
+                                        
+                                        </script>
                                 </div>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                 </center>
@@ -366,14 +444,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- FIN DE MODAL PARA NUEVA  -->
+                <!-- FIN DE MODAL PARA NUEVO USR  -->
 
-
-
-
-
-                <!-- INICIO MODAL PARA EDITAR  -->
-                <div class="modal-container">
+                
                     <div class="modal fade bd-example-modal-lg" id="dialogo2">
                         <!-- COLOCARLE UN lg PARA TAMANO MEDIANO COLOCARLE UN sm PARA TAMANO PEQUENO -->
                         <div class="modal-dialog modal-md">
@@ -457,32 +530,43 @@
                             </div>
     </main>
 
-@section('js')
-    {{-- VALIDACIONES --}}
-    <script src="{{ asset('assets/js/ab-usuarios.js') }}"></script>
-    {{-- BUSCADOR --}}
-    <script src="{{ asset('assets/js/ab-buscador.js') }}"></script>
-    {{-- PAGINACIÓN --}}
-    <script src="{{ asset('assets/js/ab-page.js') }}"></script>
-    {{-- GENERADOR DE EXCEL --}}
-    <script>
-        const $btnExportar = document.querySelector("#btnExportar"),
-            $tabla = document.querySelector("#tabla");
+    @section('js')
+        {{-- VALIDACIONES --}}
+        <script src="{{ asset('assets/js/ab-usuarios.js') }}"></script>
+        <script src="{{ asset('assets/js/registro.js') }}"></script>
 
-        $btnExportar.addEventListener("click", function() {
-            let tableExport = new TableExport($tabla, {
-                exportButtons: false, // No queremos botones
-                filename: "Reporte de Usuarios", //Nombre del archivo de Excel
-                sheetname: "Reporte de Usuarios", //Título de la hoja
-                ignoreCols: 9,
+         <!-- inject:js -->
+        <script src="{{asset('assets/js/off-canvas.js')}}"></script>
+        <script src="{{asset('assets/js/hoverable-collapse.js')}}"></script>
+        <script src="{{asset('assets/js/misc.js')}}"></script>
+        <script src="{{asset('assets/js/settings.js')}}"></script>
+        <script src="{{asset('assets/js/todolist.js')}}"></script>
+        <!-- endinject -->
+        <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
+  
+        {{-- BUSCADOR --}}
+        <script src="{{ asset('assets/js/ab-buscador.js') }}"></script>
+        {{-- PAGINACIÓN --}}
+        <script src="{{ asset('assets/js/ab-page.js') }}"></script>
+        {{-- GENERADOR DE EXCEL --}}
+        <script>
+            const $btnExportar = document.querySelector("#btnExportar"),
+                $tabla = document.querySelector("#tabla");
+
+            $btnExportar.addEventListener("click", function() {
+                let tableExport = new TableExport($tabla, {
+                    exportButtons: false, // No queremos botones
+                    filename: "Reporte de Usuarios", //Nombre del archivo de Excel
+                    sheetname: "Reporte de Usuarios", //Título de la hoja
+                    ignoreCols: 9,
+                });
+                let datos = tableExport.getExportData();
+                let preferenciasDocumento = datos.tabla.xlsx;
+                tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType,
+                    preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento
+                    .merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
             });
-            let datos = tableExport.getExportData();
-            let preferenciasDocumento = datos.tabla.xlsx;
-            tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType,
-                preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento
-                .merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
 
 @endsection

@@ -425,7 +425,7 @@ Ajustes | inicio
                             
                             <script type="text/javascript">
 
-                              function mostrarContraActual(){
+                                function mostrarContraActual(){
                                   var cambio = document.getElementById("contra_actual_usuario");
                                   if(cambio.type == "password"){
                                     cambio.type = "text";
@@ -459,7 +459,7 @@ Ajustes | inicio
                                   }
                                 } 
                               
-                              </script>
+                            </script>
 
                             
         

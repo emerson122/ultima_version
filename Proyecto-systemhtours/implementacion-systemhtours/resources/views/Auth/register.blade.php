@@ -112,12 +112,12 @@
                 @csrf
                 <div class="form-group" >
                   <label><H4><i class="mdi mdi-account"></i>Nombre Completo</H4></label>
-                  <input type="text" id="nombre" name="nombre" placeholder="Ingresa su nombre completo" class="form-control p_input text-dark bg-white" onkeyup="validarletrasNom(this)" required>
+                  <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" class="form-control p_input text-dark bg-white" onkeyup="validarletrasNom(this)" required>
                 <div id="nomdiv"></div>
                 </div>
                 <div class="form-group" >
                   <label><H4><i class="mdi mdi-account"></i>Usuario</H4></label>
-                  <input type="text" style="text-transform:uppercase"  onkeyup="javascript:this.value=this.value.toUpperCase(); validarletrasUSR(this);" id="user" name="user" placeholder="Ingresa nombre de usuario" class="form-control p_input text-dark bg-white" required>
+                  <input type="text" style="text-transform:uppercase"  onkeyup="javascript:this.value=this.value.toUpperCase(); validarletrasUSR(this);" id="user" name="user" placeholder="Ingrese nombre de usuario" class="form-control p_input text-dark bg-white" required>
                 <div id="usrdiv"></div>
                 </div>
                 <div class="form-group">
@@ -182,20 +182,20 @@
                     ojo.className = 'mdi mdi-eye-outline';
                   }
                 }
-                </script>
-        <script>
-          function mostrarContrasena(){
-            var ojo = document.getElementById("ojo2");
-            var tipo = document.getElementById("password2");
-            if(tipo.type == "password"){
-              ojo.className = 'mdi mdi-eye-off-outline';
-                  tipo.type = "text";
-              }else{
-                tipo.type = "password";
-                ojo.className = 'mdi mdi-eye-outline';
-              }
-          } 
-        </script>
+              </script>
+              <script>
+                function mostrarContrasena(){
+                  var ojo = document.getElementById("ojo2");
+                  var tipo = document.getElementById("password2");
+                  if(tipo.type == "password"){
+                    ojo.className = 'mdi mdi-eye-off-outline';
+                        tipo.type = "text";
+                    }else{
+                      tipo.type = "password";
+                      ojo.className = 'mdi mdi-eye-outline';
+                    }
+                } 
+              </script>
         <script src="{{ asset('assets/js/registro.js') }}"></script>
      <br>
         <!-- 2 END CONTRASEÑA -->
@@ -214,24 +214,24 @@
 
   {{-- seguridad --}}
 <script>
-function muestra_requisitos_clave(clave) {
-    var mensaje = "La contraseña debe contener al menos:\n";
-    var expresion = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[^\w\s]).{8,}$/;
-    var requisitosDiv = document.getElementById("requisitos-clave");
+  function muestra_requisitos_clave(clave) {
+      var mensaje = "La contraseña debe contener al menos:\n";
+      var expresion = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[^\w\s]).{8,}$/;
+      var requisitosDiv = document.getElementById("requisitos-clave");
 
-    if (!clave.match(expresion)) {
-        if (!clave.match(/(?=.*[A-Z])/)) mensaje += "- Una letra mayúscula\n";
-        if (!clave.match(/(?=.*[0-9])/)) mensaje += "- Un número\n";
-        if (!clave.match(/(?=.*[a-z])/)) mensaje += "- Una letra minúscula\n";
-        if (!clave.match(/(?=.*[^\w\s])/)) mensaje += "- Un símbolo (!, @, #, etc.)\n";
-        if (clave.length < 8) mensaje += "- Mínimo 8 caracteres\n";
+      if (!clave.match(expresion)) {
+          if (!clave.match(/(?=.*[A-Z])/)) mensaje += "- Una letra mayúscula\n";
+          if (!clave.match(/(?=.*[0-9])/)) mensaje += "- Un número\n";
+          if (!clave.match(/(?=.*[a-z])/)) mensaje += "- Una letra minúscula\n";
+          if (!clave.match(/(?=.*[^\w\s])/)) mensaje += "- Un símbolo (!, @, #, etc.)\n";
+          if (clave.length < 8) mensaje += "- Mínimo 8 caracteres\n";
 
-        requisitosDiv.innerHTML = mensaje;
-    } else {
-        // Si se cumplen todos los requisitos, se desaparece el mensaje
-        requisitosDiv.innerHTML = "";
-    }
-}
+          requisitosDiv.innerHTML = mensaje;
+      } else {
+          // Si se cumplen todos los requisitos, se desaparece el mensaje
+          requisitosDiv.innerHTML = "";
+      }
+  }
 
 </script>
   
