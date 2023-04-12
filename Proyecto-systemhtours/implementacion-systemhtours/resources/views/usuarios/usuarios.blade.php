@@ -69,6 +69,17 @@
             })
         </script>
     @endif
+    @if(Session::has('caracteres'))
+        <input type="hidden" id="msg" value="{{ Session::get('caracteres') }}">
+        <script>
+            msg = document.getElementById('msg').value
+            Swal.fire({
+            icon: 'error',
+            text: `Error ${msg}`,
+            // footer: '<a href="">Why do I have this issue?</a>'
+            })
+        </script>
+    @endif
 
     <main>
         <div class="container-scroller">
@@ -328,27 +339,33 @@
                                             @csrf @method('POST')
                                             <label class="form-group w-75 p-1">
                                                 <label><H4><i class="mdi mdi-account"></i> Nombre completo</H4></label>
-                                                <input  type="text" id="nombre" name="nombre"                                                        placeholder="Ingrese nombre completo" 
+                                                <input  type="text" id="nom_usuario" name="nombre"                                                        placeholder="Ingrese nombre completo" 
                                                         class="form-control p_input text-white col-lg-12" 
-                                                        onkeyup="validarletrasNom(this)" required>
-                                                <div id="nomdiv"></div>
+                                                        onkeyup="validarUsrConfig(this)" required>
+                                                        <center>
+                                                            <div style="background-color: white; opacity: 0.5;" id="divusrconfig"></div>
+                                                        </center>
                                             </label>
                                             <label class="form-group w-75 p-1">
                                                 <label><H4><i class="mdi mdi-account"></i> Usuario</H4></label>
                                                 <input  type="text" style="text-transform:uppercase"  
                                                         onkeyup="javascript:this.value=this.value.toUpperCase(); 
-                                                        validarletrasUSR(this);" id="user" name="user" 
+                                                        validarUsuario(this);" id="usr_usuario" name="user" 
                                                         placeholder="Ingrese nombre de usuario" 
                                                         class="form-control p_input text-white" required>
-                                                <div id="usrdiv"></div>
+                                                        <center>
+                                                            <div style="background-color: white; opacity: 0.5;" id="divusuario"></div>
+                                                        </center>
                                             </label>
                                             <label class="form-label w-75 p-1">
                                                 <label><H4><i class="mdi mdi-email"></i> Correo Electrónico</H4></label>
                                                 <input  type="email" placeholder="Ingresa un Correo Electrónico"  
-                                                        id="correo" name="correo"  
+                                                        id="correo_usuario" name="correo"  
                                                         class="form-control p_input text-white" 
-                                                        onkeyup="validarletrasEMAIL(this)" required>
-                                                <div id="divCorreo"></div>
+                                                        onkeyup="validarCorreoConfig(this)">
+                                                        <center>
+                                                            <div style="background-color: white; opacity: 0.5;" id="divcorreoconfig"></div>
+                                                        </center>
                                             </label>
                                             <label class="form-label w-75 p-1">
                                                 <label><H4><i class="mdi mdi-lock" onclick="mostrarContra()"></i> Contraseña</H4></label>
@@ -437,6 +454,8 @@
                                             }
                                         
                                         </script>
+
+                                        <script src="{{ asset('assets/js/registro.js') }}"></script>
                                 </div>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                 </center>

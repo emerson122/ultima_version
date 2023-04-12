@@ -1,9 +1,9 @@
 //preguntas
 const expresiones = {
-    usuario: /^[a-zA-Z0-9\_\-]{4,16}$/,
-    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    contrasegna: /^.{4,12}$/, // 4 a 12 digitos.
-    correo: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+    usuario: /^[a-zA-Z\_\-]{3,16}$/,
+    nombre: /^[a-zA-ZÀ-ÿ\s|ñ|Ñ]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    contrasegna: /^.{8,32}$/, // 4 a 12 digitos.
+    correo: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
     telefono: /^[+0-9 ]{2,5} [0-9-]{4,13}[0-9-]{4,13}$/, // telefonos numeros.
     numeros: /^\d{1,10}$/, // 7 a 14 numeros.
     identidad: /^[0-9]{6}-\d{4}-\d{5}$/, // 7 a 16 numeros.
@@ -151,12 +151,32 @@ function validarUsrConfig(e) {
     }else{
         document.getElementById('nom_usuario').classList.add('incorrecto') 
       
-        div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras</h5></font>'
+        div.innerHTML='<font color="red"> <h5>Solo puede ingresar letras, espacios, tildes</h5></font>'
 
         console.log('incorrecto');
 
     }
     
+}
+
+function validarUsuario(e) {
+    let usuario = document.getElementById('usr_usuario').value;
+    let div = document.getElementById('divusuario');
+
+    if (expresiones.usuario.test(usuario )) {
+        document.getElementById('usr_usuario').classList.remove('incorrecto') 
+        document.getElementById('usr_usuario').classList.add('correcto') 
+ 
+        div.innerHTML='';
+        console.log('correcto');
+    }else{
+        document.getElementById('usr_usuario').classList.add('incorrecto') 
+      
+        div.innerHTML='<font color="red"> <h5>Solo puedes ingresar letras mayor a 3 caracteres sin espacios</h5></font>'
+
+        console.log('incorrecto');
+
+    }
 }
 
 //Genero
@@ -328,7 +348,7 @@ function validarCorreoConfig(e) {
     }else{
         document.getElementById('correo_usuario').classList.add('incorrecto') 
       
-        div.innerHTML='<font color="red"> <h5>Debe ingresar un correo valido</h5></font>'
+        div.innerHTML='<font color="red"> <h5>Debe ingresar un correo valido ej: hola@correo.com</h5></font>'
 
         console.log('incorrecto');
 
