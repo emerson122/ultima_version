@@ -392,3 +392,16 @@ function contra_comparar(){
           event.preventDefault();
     }
 }
+
+function validacionUSRMod() {
+    let correo = document.getElementById(`correo_usuario-edit-${e}`).value;
+    
+    if (correo == "") {
+        alert("Correo ya se encuentra en uso");
+        document.getElementById(`correo_usuario-edit-${e}`).className =
+            "form-control p_input text-dark bg-warning";
+        document.location.href = "#correo";
+        event.preventDefault();
+    }
+    
+}

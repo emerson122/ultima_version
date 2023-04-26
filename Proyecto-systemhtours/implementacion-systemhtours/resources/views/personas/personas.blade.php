@@ -532,6 +532,10 @@
                             </Select>
                             </label>
                             <br>
+                            
+                           
+
+
                         </center>
                             {{-- centrado  --}}
                             &nbsp;
@@ -586,6 +590,7 @@
 @section('js')
     <script src="{{ asset('assets/js/ab-formularios.js') }}"></script>
     <script src="{{ asset('assets/js/ab-buscador.js') }}"></script>
+    <script src="{{ asset('assets/js/ab-valpersonas.js') }}"></script>
     {{-- Enlace a paginador de javascript --}}
     <script src="{{ asset('assets/js/ab-page.js') }}"></script>
 

@@ -70,7 +70,7 @@
   <script>
     Swal.fire({
       icon: 'error',
-      text: 'El usuario que indico, no esta disponible',
+      text: 'El usuario y/o correo que indico, no esta disponible',
       // footer: '<a href="">Why do I have this issue?</a>'
     })
     // alert('El usuario que indico ya existe')
@@ -83,7 +83,7 @@
       text: 'El correo que indico, no esta disponible',
       // footer: '<a href="">Why do I have this issue?</a>'
     })
-    // alert('El usuario que indico ya existe')
+     alert('El correo que indico ya existe')
   </script>
   @endif
 

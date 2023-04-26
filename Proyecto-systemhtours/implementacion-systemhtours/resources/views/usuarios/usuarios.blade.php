@@ -69,6 +69,26 @@
             })
         </script>
     @endif
+    @if(Session::has('existe'))
+    <script>
+      Swal.fire({
+        icon: 'error',
+        text: 'El usuario y/o correo que indico, no esta disponible',
+        // footer: '<a href="">Why do I have this issue?</a>'
+      })
+      alert('El usuario y/o correo que indico ya existe')
+    </script>
+    @endif
+    @if (Session::has('correo_existe'))
+    <script>
+        Swal.fire({
+        icon: 'error',
+        text: 'El correo que indico, no esta disponible por que se encuentra en uso'
+        // footer: '<a href="">Why do I have this issue?</a>'
+    })
+    alert('El correo que indico ya existe')
+    </script>
+    @endif
     @if(Session::has('caracteres'))
         <input type="hidden" id="msg" value="{{ Session::get('caracteres') }}">
         <script>
@@ -183,7 +203,7 @@
                                                                     <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
                                                                 </div>
                                                                 <!-- CUERPO DEL DIALOGO NUEVA -->
-                                                                <div class="modal-body">
+                                                                <div class="modal-body" style="width: 30rem;">
                                                                     <center>
                                                                         <form action="{{ route('usuarios.actualizar') }}"
                                                                             method="put">
@@ -193,11 +213,11 @@
                                                                             <label class="form-label">
                                                                                 Usuario
                                                                                 <input type='text' name='USUARIO'
-                                                                                    class="form-control text-white"
+                                                                                    class="form-control text-info bg-dark font-weight-bold"
                                                                                     id="nom_usuario-edit-{{ $usuario['CODIGO_USUARIO'] }}" maxlength="50"
                                                                                     onkeyup="validarNomUsuario({{ $usuario['CODIGO_USUARIO'] }})"
                                                                                     value="{{ $usuario['USUARIO'] }}"
-                                                                                    required>
+                                                                                    disabled readonly>
                                                                                     <center>
                                                                                         <div style="background-color: white; opacity: 0.5;" id="divnomusuario-edt-{{ $usuario['CODIGO_USUARIO'] }}"></div>
                                                                                     </center>
@@ -246,9 +266,9 @@
                                                                                 </select>
                                                                             </label>
                                                                             <br>
-                                                                            <label class="form-label">
+                                                                            <label class="form-label" >
                                                                                 Correo Electronico
-                                                                                <input type='email' name='CORREO'
+                                                                                <input type='email' name='CORREO' name="correo" id="correo_usuario"
                                                                                     class="form-control text-white"
                                                                                     id="correo_usuario-edit-{{  $usuario['CODIGO_USUARIO']  }}" 
                                                                                     onkeyup="validarCorreoEdit({{  $usuario['CODIGO_USUARIO']  }})"
@@ -263,12 +283,14 @@
                                                                             <a href=""
                                                                                 class="btn btn-secondary">Cancelar</a>
                                                                             <button type="submit"
-                                                                                class="btn btn-primary">Aceptar</button>
+                                                                                class="btn btn-primary" onclick="validacionUSRMod()">Aceptar</button>
                                                                         </form>
+                                                                        <script src="{{ asset('assets/js/registro.js') }}"></script>
+                                                                        <script src="{{ asset('assets/js/ab-usuarios.js') }}"></script>
                                                                 </div>
                                                                 <button type="button" class="btn btn-danger"
                                                                     data-dismiss="modal">Cerrar</button>
-                                                                </center>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>

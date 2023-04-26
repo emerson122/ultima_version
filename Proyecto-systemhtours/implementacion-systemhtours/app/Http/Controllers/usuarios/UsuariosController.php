@@ -102,27 +102,36 @@ class UsuariosController extends Controller
             return 'Error USUARIOS 90';
         }
         if ($update == '1') {
-            try {
-        $usr = http::withToken(Cache::get('token'))->put($this->url.'/upd_usr',[
+        try {
+            $correo_REGISTRADO = 0;
+            $usr = http::withToken(Cache::get('token'))->put($this->url.'/upd_usr',[
+                
+                    "USR" => $req->USUARIO,
+                    "NOM_USR" => $req->NOMBRE_USUARIO,
+                    "EST_USR" => $req->ESTADO,
+                    "COD_ROL" => $req->ROL,
+                    "CORREO" => $req->CORREO,
+                    "FILA" => $req->COD_USR
+            ]);
             
-                "USR" => $req->USUARIO,
-                "NOM_USR" => $req->NOMBRE_USUARIO,
-                "EST_USR" => $req->ESTADO,
-                "COD_ROL" => $req->ROL,
-                "CORREO" => $req->CORREO,
-                "FILA" => $req->COD_USR
-        ]);
+            $correo_REGISTRADO = strrpos($usr, "EL CORREO YA EXISTE");
+            if ($correo_REGISTRADO > 0) {
+                Session::flash("correo_existe", "EL CORREO");
+                return back();
+            }
+    
         } catch (\Throwable $th) {
             //throw $th;
             return 'error USUARIOS 164';
         }
 
+        
 
         try {
             $bitacora = Http::withToken(Cache::get('token'))->post($this->url . '/seguridad/bitacora/insertar', [
                 "USR" => Cache::get('user'),
                 "ACCION" => 'PANTALLA USUARIOS METODO POST',
-                "DES" => Cache::get('user') . ' ACTUALIZO UN USUARIO A '. $req->USUARIO,
+                "DES" => Cache::get('user') . ' ACTUALIZO EL USUARIO: '. $req->USUARIO,
                 "OBJETO" => 'USUARIOS'
             ]);
         } catch (\Throwable $th) {
@@ -150,6 +159,17 @@ class UsuariosController extends Controller
             return back();
     }
     
+    public function correo_REGISTRADO(Request $req){
+        $correo_REGISTRADO = 0;
+        $usr = http::withToken(Cache::get('token'))->put($this->url.'/upd_usr',[
+            
+        ]);
+        $correo_REGISTRADO = strrpos($usr, "EL CORREO YA EXISTE");
+            if ($correo_REGISTRADO > 0) {
+                Session::flash("correo_existe", "EL CORREO");
+                return back();
+            }
+    }
     
    public function crearPDF()
    {
