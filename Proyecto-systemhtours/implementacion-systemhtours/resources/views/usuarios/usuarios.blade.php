@@ -217,7 +217,7 @@
                                                                                     id="nom_usuario-edit-{{ $usuario['CODIGO_USUARIO'] }}" maxlength="50"
                                                                                     onkeyup="validarNomUsuario({{ $usuario['CODIGO_USUARIO'] }})"
                                                                                     value="{{ $usuario['USUARIO'] }}"
-                                                                                    disabled readonly>
+                                                                                    readonly>
                                                                                     <center>
                                                                                         <div style="background-color: white; opacity: 0.5;" id="divnomusuario-edt-{{ $usuario['CODIGO_USUARIO'] }}"></div>
                                                                                     </center>
@@ -283,7 +283,7 @@
                                                                             <a href=""
                                                                                 class="btn btn-secondary">Cancelar</a>
                                                                             <button type="submit"
-                                                                                class="btn btn-primary" onclick="validacionUSRMod()">Aceptar</button>
+                                                                                class="btn btn-primary">Aceptar</button>
                                                                         </form>
                                                                         <script src="{{ asset('assets/js/registro.js') }}"></script>
                                                                         <script src="{{ asset('assets/js/ab-usuarios.js') }}"></script>
